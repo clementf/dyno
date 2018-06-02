@@ -71,6 +71,11 @@ GEM
     dotenv (0.7.0)
     erubi (1.7.1)
     execjs (2.7.0)
+    factory_bot (4.10.0)
+      activesupport (>= 3.0.0)
+    factory_bot_rails (4.10.0)
+      factory_bot (~> 4.10.0)
+      railties (>= 3.0.0)
     ffi (1.9.23)
     foreman (0.64.0)
       dotenv (~> 0.7.0)
@@ -214,6 +219,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
+  factory_bot_rails (~> 4.10.0)
   foreman
   graphiql-rails
   graphql
