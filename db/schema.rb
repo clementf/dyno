@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_200203) do
+ActiveRecord::Schema.define(version: 2018_06_02_125634) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blocks", force: :cascade do |t|
+    t.string "transcript"
+    t.bigint "translation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["translation_id"], name: "index_blocks_on_translation_id"
+  end
+
+  create_table "blocks_sessions", id: false, force: :cascade do |t|
+    t.bigint "session_id"
+    t.bigint "block_id"
+    t.index ["block_id"], name: "index_blocks_sessions_on_block_id"
+    t.index ["session_id"], name: "index_blocks_sessions_on_session_id"
+  end
 
   create_table "languages", force: :cascade do |t|
     t.string "lang"
@@ -23,6 +38,11 @@ ActiveRecord::Schema.define(version: 2018_05_30_200203) do
 
   create_table "sentences", force: :cascade do |t|
     t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_05_30_200203) do
     t.index ["sentence_id"], name: "index_translations_on_sentence_id"
   end
 
+  add_foreign_key "blocks", "translations"
   add_foreign_key "translations", "languages"
   add_foreign_key "translations", "sentences"
 end
