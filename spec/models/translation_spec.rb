@@ -9,8 +9,9 @@ describe Translation do
     let(:nl_translation) { create(:translation, :nl, original: original) }
 
     describe '#language' do
-      it 'returns nl' do
-        expect(nl_translation.lang).to eq('nl')
+      it 'returns Lnaguage object for nl' do
+        expect(nl_translation.language.class.name).to eq('Language')
+        expect(nl_translation.language.lang).to eq('nl')
       end
     end
 
