@@ -15,5 +15,13 @@ module Hermes
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    load_paths = %W(#{config.root}/app/services)
+
+    # for development
+    config.autoload_paths += load_paths
+    # for production
+    config.eager_load_paths += load_paths
+
   end
 end
