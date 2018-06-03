@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_02_125634) do
+ActiveRecord::Schema.define(version: 2018_06_03_164718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,16 +48,16 @@ ActiveRecord::Schema.define(version: 2018_06_02_125634) do
   end
 
   create_table "translations", force: :cascade do |t|
-    t.bigint "sentence_id"
+    t.bigint "original_id"
     t.bigint "language_id"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["language_id"], name: "index_translations_on_language_id"
-    t.index ["sentence_id"], name: "index_translations_on_sentence_id"
+    t.index ["original_id"], name: "index_translations_on_original_id"
   end
 
   add_foreign_key "blocks", "translations"
   add_foreign_key "translations", "languages"
-  add_foreign_key "translations", "sentences"
+  add_foreign_key "translations", "sentences", column: "original_id"
 end

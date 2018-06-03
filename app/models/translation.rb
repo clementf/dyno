@@ -1,4 +1,6 @@
 class Translation < ApplicationRecord
-  belongs_to :sentence
+  include Translatable
+
+  belongs_to :original, class_name: 'Sentence'
   belongs_to :language
 end
