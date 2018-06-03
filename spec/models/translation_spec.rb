@@ -19,5 +19,11 @@ describe Translation do
         expect(nl_translation.lang).to eq('nl')
       end
     end
+
+    describe '#original' do
+      it 'returns original sentence' do
+        expect(nl_translation.original).to eq(original)
+      end
+    end
   end
 end

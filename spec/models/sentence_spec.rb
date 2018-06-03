@@ -16,4 +16,10 @@ describe Sentence do
       expect(sentence.lang).to eq('en')
     end
   end
+
+  describe '#original' do
+    it 'returns itself' do
+      expect(sentence.original).to eq(sentence)
+    end
+  end
 end
