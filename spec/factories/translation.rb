@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :translation do
-    content "Content of the translation"
+    content 'Content of the translation'
     association :original, factory: :sentence
 
     transient do
@@ -19,6 +21,5 @@ FactoryBot.define do
         lang 'nl'
       end
     end
-
   end
 end
