@@ -18,8 +18,10 @@ ActiveRecord::Schema.define(version: 2018_06_03_164718) do
   create_table "blocks", force: :cascade do |t|
     t.string "transcript"
     t.bigint "translation_id"
+    t.integer "target_language_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["target_language_id"], name: "index_blocks_on_target_language_id"
     t.index ["translation_id"], name: "index_blocks_on_translation_id"
   end
 

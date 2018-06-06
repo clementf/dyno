@@ -7,6 +7,7 @@ class CreateSession < ActiveRecord::Migration[5.2]
     create_table :blocks do |t|
       t.string :transcript
       t.belongs_to :translation, index: true, foreign_key: true
+      t.integer :target_language_id, index: true, foreign_key: true
       t.timestamps
     end
 
