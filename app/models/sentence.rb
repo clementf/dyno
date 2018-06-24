@@ -3,7 +3,9 @@
 class Sentence < ApplicationRecord
   include Translatable
 
-  has_many :translations
+  def translations
+    Translation.where(original: self)
+  end
 
   def language
     Language.find_or_create_by(lang: 'en')
