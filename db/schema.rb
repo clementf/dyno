@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_03_164718) do
+ActiveRecord::Schema.define(version: 2018_06_23_095116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2018_06_03_164718) do
     t.integer "target_language_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "sentence_id"
+    t.index ["sentence_id"], name: "index_blocks_on_sentence_id"
     t.index ["target_language_id"], name: "index_blocks_on_target_language_id"
     t.index ["translation_id"], name: "index_blocks_on_translation_id"
   end
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 2018_06_03_164718) do
     t.index ["original_id"], name: "index_translations_on_original_id"
   end
 
+  add_foreign_key "blocks", "sentences"
   add_foreign_key "blocks", "translations"
   add_foreign_key "translations", "languages"
   add_foreign_key "translations", "sentences", column: "original_id"
