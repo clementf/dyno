@@ -9,11 +9,26 @@ class Block < ApplicationRecord
 
   validates_with LanguageValidator
 
+  validates_uniqueness_of :translation_id, scope: :target_language, allow_nil: true
+  validates_uniqueness_of :sentence_id,    scope: :target_language, allow_nil: true
+
   def target_lang
     target_language.lang
   end
 
+  def base
+    translation || sentence
+  end
+
   def base_lang
-    translation.lang
+    base.lang
+  end
+
+  def content_for_base_lang
+    base.content
+  end
+
+  def content_for_target_lang
+    base.translate_to(target_lang).content
   end
 end
