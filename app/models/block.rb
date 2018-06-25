@@ -1,17 +1,5 @@
 # frozen_string_literal: true
 
-class LanguageValidator < ActiveModel::Validator
-  def validate(record)
-    add_lang_error(record) if record.target_lang == record.base_lang
-  end
-
-  private
-
-  def add_lang_error(record)
-    record.errors[:language] << 'Base and target languages should be different'
-  end
-end
-
 class Block < ApplicationRecord
   has_and_belongs_to_many :sessions
   belongs_to :translation
