@@ -36,4 +36,15 @@ class Block < ApplicationRecord
   def create_audio
     AudioBlockFactoryJob.perform_later(self)
   end
+
+  def self.with_langs(langs)
+    if langs.base_lang == 'en'
+      where(target_language: langs.target_language,
+            translation_id: nil)
+    else
+      joins(:translation).where(target_language: langs.target_language,
+                                'translations.language_id': langs.base_language)
+
+    end
+  end
 end
