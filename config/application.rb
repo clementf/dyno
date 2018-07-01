@@ -16,12 +16,13 @@ module Hermes
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    load_paths = %W(#{config.root}/app/services)
+    load_paths = %W[#{config.root}/app/services]
 
     # for development
     config.autoload_paths += load_paths
     # for production
     config.eager_load_paths += load_paths
 
+    config.active_job.queue_adapter = :sidekiq
   end
 end
