@@ -25,7 +25,10 @@ module TTS
     end
 
     def attach_file_to_block(audio_block_file_path)
-      puts "attaching #{audio_block_file_path} to block"
+      @block.audio.attach(
+        io:       File.open(audio_block_file_path),
+        filename: "block_#{@block.id}.mp3"
+      )
     end
 
     private

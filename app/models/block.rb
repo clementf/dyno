@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Block < ApplicationRecord
+  has_one_attached :audio
   has_and_belongs_to_many :sessions
   belongs_to :translation, optional: true
   belongs_to :sentence, optional: true
@@ -30,5 +31,14 @@ class Block < ApplicationRecord
 
   def content_for_target_lang
     base.translate_to(target_lang).content
+  end
+
+  def create_audio
+    audio_factory = TTS::AudioBlockFactory.new(
+      block: self,
+      text_converter: TTS::TextConverter.new
+    )
+
+    audio_factory.create
   end
 end
