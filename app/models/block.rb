@@ -34,11 +34,6 @@ class Block < ApplicationRecord
   end
 
   def create_audio
-    audio_factory = TTS::AudioBlockFactory.new(
-      block: self,
-      text_converter: TTS::TextConverter.new
-    )
-
-    audio_factory.create
+    AudioBlockFactoryJob.perform_later(self)
   end
 end
