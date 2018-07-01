@@ -5,6 +5,10 @@ module Translatable
     language.lang
   end
 
+  def create_block(target_lang = 'en')
+    BlockFactory.create(translatable: self, target_lang: target_lang)
+  end
+
   def translate_to(target_lang = 'en')
     target_language = Language.find_by(lang: target_lang)
 
