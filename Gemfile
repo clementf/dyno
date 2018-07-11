@@ -19,6 +19,8 @@ gem 'uglifier', '>= 1.3.0'
 group :development, :test do
   gem 'awesome_print'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pronto'
+  gem 'pronto-rubocop', require: false
 end
 
 group :development do
