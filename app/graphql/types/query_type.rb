@@ -1,13 +1,13 @@
-Types::QueryType = GraphQL::ObjectType.define do
-  name "Query"
-  # Add root-level fields here.
-  # They will be entry points for queries on your schema.
+# frozen_string_literal: true
 
-  # TODO: remove me
-  field :testField, types.String do
-    description "An example field added by the generator"
-    resolve ->(obj, args, ctx) {
-      "Hello World!"
-    }
+class Types::QueryType < GraphQL::Schema::Object
+  graphql_name 'Query'
+
+  field :next_session, Types::SessionType, null: true do
+    description 'Find the next session'
+  end
+
+  def next_session(**_args)
+    Session.take(1).first
   end
 end

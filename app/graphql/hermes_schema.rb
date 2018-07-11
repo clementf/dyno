@@ -1,4 +1,6 @@
-HermesSchema = GraphQL::Schema.define do
-  mutation(Types::MutationType)
-  query(Types::QueryType)
+# frozen_string_literal: true
+
+class HermesSchema < GraphQL::Schema
+  mutation Types::MutationType
+  query Types::QueryType
 end

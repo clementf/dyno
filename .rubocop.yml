@@ -12,6 +12,10 @@ Style/FrozenStringLiteralComment:
   Exclude:
     - 'config/**/*.rb'
 
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/graphql/**/*.rb'
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
