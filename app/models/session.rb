@@ -3,10 +3,10 @@
 class Session < ApplicationRecord
   has_and_belongs_to_many :blocks
 
-  DEFAULT_SESSION_SIZE = 5
+  DEFAULT_SESSION_SIZE = 10
 
   def self.create_next(langs)
-    blocks = Block.with_langs(langs).limit(DEFAULT_SESSION_SIZE)
+    blocks = Block.with_langs(langs).order(id: :asc).limit(DEFAULT_SESSION_SIZE)
 
     Session.create(blocks: blocks)
   end

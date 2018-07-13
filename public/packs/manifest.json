@@ -1,8 +1,8 @@
 {
-  "application.js": "/packs/application-aad82b9c7a246f5153d8.js",
-  "application.js.map": "/packs/application-aad82b9c7a246f5153d8.js.map",
-  "player.js": "/packs/player-ff14695fa7c6165e766c.js",
-  "player.js.map": "/packs/player-ff14695fa7c6165e766c.js.map",
-  "session_player.js": "/packs/session_player-2227c561aa04f3e4ef99.js",
-  "session_player.js.map": "/packs/session_player-2227c561aa04f3e4ef99.js.map"
+  "application.js": "/packs/application-c0221b5dec7d83a6c9af.js",
+  "application.js.map": "/packs/application-c0221b5dec7d83a6c9af.js.map",
+  "player.js": "/packs/player-1d38e32c3fd486bcea8d.js",
+  "player.js.map": "/packs/player-1d38e32c3fd486bcea8d.js.map",
+  "session_player.js": "/packs/session_player-4fcf22ee0755e8f6cd86.js",
+  "session_player.js.map": "/packs/session_player-4fcf22ee0755e8f6cd86.js.map"
 }

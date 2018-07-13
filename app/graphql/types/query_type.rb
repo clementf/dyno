@@ -8,6 +8,6 @@ class Types::QueryType < GraphQL::Schema::Object
   end
 
   def next_session(**_args)
-    Session.take(1).first
+    Session.take(1).first || Session.create_next(Langs.new('en', 'nl'))
   end
 end
