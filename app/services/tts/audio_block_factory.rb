@@ -38,7 +38,7 @@ module TTS
     end
 
     def create_audio_base_lang
-      text = @block.content_for_base_lang + 'is'
+      text = @block.content_for_base_lang + ', is'
 
       @text_converter.to_audio(text: text,
                                lang: @block.base_lang,
