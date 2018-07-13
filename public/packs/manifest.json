@@ -1,6 +1,8 @@
 {
-  "application.js": "/packs/application-a04fa5779778c32a607b.js",
-  "application.js.map": "/packs/application-a04fa5779778c32a607b.js.map",
-  "session_player.js": "/packs/session_player-840432d3cbf09b388f21.js",
-  "session_player.js.map": "/packs/session_player-840432d3cbf09b388f21.js.map"
+  "application.js": "/packs/application-aad82b9c7a246f5153d8.js",
+  "application.js.map": "/packs/application-aad82b9c7a246f5153d8.js.map",
+  "player.js": "/packs/player-ff14695fa7c6165e766c.js",
+  "player.js.map": "/packs/player-ff14695fa7c6165e766c.js.map",
+  "session_player.js": "/packs/session_player-2227c561aa04f3e4ef99.js",
+  "session_player.js.map": "/packs/session_player-2227c561aa04f3e4ef99.js.map"
 }

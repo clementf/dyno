@@ -1,22 +1,33 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+import ApolloClient from "apollo-boost";
+import gql from "graphql-tag";
+import Player from './player.js'
 
-const Hello = props => (
-  <div>Hello {props.name}!</div>
-)
+const client = new ApolloClient({
+  uri: "http://localhost:5000/graphql"
+});
 
-Hello.defaultProps = {
-  name: 'David'
+let sessionData = {}
+let player;
+
+function parseNextSession(data) {
+  sessionData = data.data.nextSession
+  player = new Player(sessionData.blocks.map(block => { return block.audio }))
+  player.play()
 }
 
-Hello.propTypes = {
-  name: PropTypes.string
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Hello name="Clement" />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+client
+  .query({
+    query: gql`
+    {
+      nextSession {
+        blocks {
+          transcript
+          audio
+        }
+      }
+    }
+    `
+  })
+  .then(result => parseNextSession(result));
