@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import Player from './player.js'
 
 const client = new ApolloClient({
-  uri: "http://localhost:5000/graphql"
+  uri: "/graphql"
 });
 
 let sessionData = {}
