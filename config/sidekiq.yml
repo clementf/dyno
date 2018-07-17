@@ -1,0 +1,3 @@
+---
+:concurrency: <%= ENV["SIDEKIQ_THREADS"] || 2 %>
+
