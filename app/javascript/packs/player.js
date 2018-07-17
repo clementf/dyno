@@ -30,7 +30,7 @@ class Player {
     sound.on('end', function(){
       window.setTimeout(function(){
         hacky.playNext()
-      }, 900)
+      }, 1500)
     });
 
   }
