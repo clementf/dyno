@@ -7,7 +7,7 @@ describe Block do
   it { is_expected.to belong_to(:target_language) }
   it { is_expected.to have_and_belong_to_many(:sessions) }
 
-  describe LanguageValidator do
+  describe BlockValidator do
     context 'when target and base language are different' do
       it 'block is valid' do
         block = build(:block)

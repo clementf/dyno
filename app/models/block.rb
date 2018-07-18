@@ -8,7 +8,7 @@ class Block < ApplicationRecord
   belongs_to :target_language, class_name:  'Language',
                                foreign_key: 'target_language_id'
 
-  validates_with LanguageValidator
+  validates_with BlockValidator
 
   validates_uniqueness_of :translation_id, scope: :target_language, allow_nil: true
   validates_uniqueness_of :sentence_id,    scope: :target_language, allow_nil: true
