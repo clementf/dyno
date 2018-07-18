@@ -13,6 +13,8 @@ class Block < ApplicationRecord
   validates_uniqueness_of :translation_id, scope: :target_language, allow_nil: true
   validates_uniqueness_of :sentence_id,    scope: :target_language, allow_nil: true
 
+  scope :with_audio, -> { joins(:audio_attachment).where.not(audio_attachment: nil) }
+
   def target_lang
     target_language.lang
   end
