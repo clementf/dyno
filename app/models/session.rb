@@ -7,14 +7,12 @@ class Session < ApplicationRecord
 
   DEFAULT_BLOCK_COUNT = 10
 
-  def self.create_next(langs, block_count)
+  def self.create_next(langs, block_count = DEFAULT_BLOCK_COUNT)
     return unless langs.present?
-
-    block_count ||= DEFAULT_BLOCK_COUNT
 
     blocks = Block.with_audio
                   .with_langs(langs)
-                  .order(id: :asc)
+                  .order('RANDOM()')
                   .limit(block_count)
 
     Session.create(blocks: blocks)

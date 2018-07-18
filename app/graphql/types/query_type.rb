@@ -8,6 +8,7 @@ class Types::QueryType < GraphQL::Schema::Object
   end
 
   def next_session(**_args)
-    Session.take(1).first || Session.create_next(Langs.new('en', 'nl'))
+    default_langs = Langs.new('en', 'nl')
+    Session.create_next(default_langs)
   end
 end
