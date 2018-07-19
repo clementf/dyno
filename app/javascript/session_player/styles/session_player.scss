@@ -1,0 +1,74 @@
+// https://coolors.co/db5461-ffd9ce-593c8f-8ef9f3-171738
+
+$color: #ffd9ce;
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: #db5461;
+  text-align: center;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #session-player {
+    height: 100px;
+    width: 100px;
+
+    background-color: #593c8f;
+    border-radius: 50%;
+
+    border: 3px solid #171738;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .play-button {
+      background:transparent;
+      cursor: pointer;
+      color: white;
+      height: 100px;
+      width: 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 100%;
+      text-transform: uppercase;
+      font-family: 'Muli-LightItalic', Helvetica;
+      font-size: 20px;
+      line-height: 30px;
+      animation: ripple 1.5s linear infinite;
+      transition: all 0.7s ease;
+
+
+      &:hover
+      {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes ripple {
+      0% {
+        box-shadow: 0 0 0 0 rgba($color, 0.3),
+        0 0 0 1px rgba($color, 0.3),
+        0 0 0 3px rgba($color, 0.3),
+        0 0 0 5px rgba($color, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba($color, 0.3),
+        0 0 0 4px rgba($color, 0.3),
+        0 0 0 20px rgba($color, 0),
+        0 0 0 30px rgba($color, 0);
+      }
+    }
+
+  }
+
+}
+

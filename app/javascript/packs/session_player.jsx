@@ -4,6 +4,8 @@ import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import Player from './player.js'
 
+import '../session_player/styles/session_player'
+
 const client = new ApolloClient({
   uri: "/graphql"
 });
@@ -11,15 +13,28 @@ const client = new ApolloClient({
 let sessionData = {}
 let player;
 
-function parseNextSession(data) {
-  sessionData = data.data.nextSession
-  player = new Player(sessionData.blocks.map(block => { return block.audio }))
-  player.play()
-}
+class SessionPlayer extends React.Component {
 
-client
-  .query({
-    query: gql`
+  constructor(props){
+    super(props)
+  }
+
+  render(){
+    return (
+      <div className="play-button" onClick={ () => this.playNextSession() }>
+      </div>
+    )
+  }
+
+  parseSession(data) {
+    sessionData = data.data.nextSession
+    player = new Player(sessionData.blocks.map(block => { return block.audio }))
+    player.play()
+  }
+
+  getNextSession(){
+    client.query({
+      query: gql`
     {
       nextSession {
         blocks {
@@ -29,5 +44,19 @@ client
       }
     }
     `
-  })
-  .then(result => parseNextSession(result));
+    }).then(result => this.parseSession(result));
+  }
+
+  playNextSession(){
+    this.getNextSession()
+  }
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  ReactDOM.render(
+    <SessionPlayer/>,
+    document.getElementById('session-player')
+  )
+})
+
