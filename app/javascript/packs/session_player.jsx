@@ -17,6 +17,7 @@ class SessionPlayer extends React.Component {
 
   constructor(props){
     super(props)
+    this.playing = false;
   }
 
   render(){
@@ -28,11 +29,15 @@ class SessionPlayer extends React.Component {
 
   parseSession(data) {
     sessionData = data.data.nextSession
-    player = new Player(sessionData.blocks.map(block => { return block.audio }))
+    player = new Player(sessionData.blocks.map(block => { return block.audio }), this)
     player.play()
+    this.playing = true;
   }
 
   getNextSession(){
+    if(this.playing)
+      return
+
     client.query({
       query: gql`
     {
