@@ -8,6 +8,7 @@ ruby '2.5.0'
 gem 'aws-sdk-polly', '~> 1.6.0'
 gem 'aws-sdk-s3', '~> 1.17.0'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'devise', '~> 4.4.3'
 gem 'graphql'
 gem 'jbuilder', '~> 2.5'
 gem 'pg', '>= 0.18', '< 2.0'
