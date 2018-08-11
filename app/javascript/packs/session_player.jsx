@@ -17,31 +17,48 @@ class SessionPlayer extends React.Component {
 
   constructor(props){
     super(props)
-    this.playing = false;
+    this.state = {
+      playing: false,
+      sessionDuration: 1
+    };
+
+    this.handleChangeDuration = this.handleChangeDuration.bind(this);
   }
 
   render(){
     return (
-      <div className="play-button" onClick={ () => this.playNextSession() }>
+      <div>
+        <div className="play-button-wrapper">
+          <div className="play-button" onClick={ () => this.playNextSession() }>
+        </div>
+
+        </div>
+        <input type="number" onChange={ this.handleChangeDuration } value={ this.state.sessionDuration }/>
       </div>
     )
   }
+
+
+  handleChangeDuration(event) {
+    this.setState({ sessionDuration: event.target.value});
+  }
+
 
   parseSession(data) {
     sessionData = data.data.nextSession
     player = new Player(sessionData.blocks.map(block => { return block.audio }), this)
     player.play()
-    this.playing = true;
+    this.setState({ playing: true });
   }
 
   getNextSession(){
-    if(this.playing)
+    if(this.state.playing)
       return
 
     client.query({
       query: gql`
     {
-      nextSession {
+      nextSession(length: ${this.state.sessionDuration * 60} ) {
         blocks {
           transcript
           audio
