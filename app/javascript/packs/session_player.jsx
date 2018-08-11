@@ -17,30 +17,45 @@ class SessionPlayer extends React.Component {
 
   constructor(props){
     super(props)
+
     this.state = {
       playing: false,
       sessionDuration: 1
     };
-
-    this.handleChangeDuration = this.handleChangeDuration.bind(this);
   }
 
   render(){
     return (
       <div>
         <div className="play-button-wrapper">
-          <div className="play-button" onClick={ () => this.playNextSession() }>
+          <div className="play-button" onClick={ () => this.playNextSession() }></div>
         </div>
 
+        <div className="controls-wrapper">
+          <span className="controls" onClick={ () => this.decrementSessionDuration() }>-</span>
+          <span>
+            <div>{ this.state.sessionDuration }</div>
+            <div>min</div>
+          </span>
+          <span className="controls" onClick={ () => this.incrementSessionDuration() }>+</span>
         </div>
-        <input type="number" onChange={ this.handleChangeDuration } value={ this.state.sessionDuration }/>
       </div>
     )
   }
 
 
-  handleChangeDuration(event) {
-    this.setState({ sessionDuration: event.target.value});
+  incrementSessionDuration(){
+    let oldValue = this.state.sessionDuration
+
+    if(oldValue < 10)
+      this.setState({ sessionDuration: oldValue + 1});
+  }
+
+  decrementSessionDuration(){
+    let oldValue = this.state.sessionDuration
+
+    if(oldValue > 1)
+      this.setState({ sessionDuration: oldValue - 1});
   }
 
 
