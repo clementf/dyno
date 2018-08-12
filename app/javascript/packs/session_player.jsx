@@ -28,7 +28,9 @@ class SessionPlayer extends React.Component {
     return (
       <div>
         <div className="play-button-wrapper">
-          <div className="play-button" onClick={ () => this.playNextSession() }></div>
+          <div className={`play-button ${ this.state.playing ? 'pause' : 'play' }` } onClick={ () => this.playNextSession() }>
+            <span class="left"></span><span class="right"></span>
+          </div>
         </div>
 
         <div className="controls-wrapper">

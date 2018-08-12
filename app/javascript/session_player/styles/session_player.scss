@@ -43,46 +43,91 @@ body {
     align-items: center;
 
     .play-button {
-      background:transparent;
       cursor: pointer;
-      color: white;
       height: 100px;
       width: 100px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       border-radius: 100%;
-      text-transform: uppercase;
-      font-family: 'Muli-LightItalic', Helvetica;
-      font-size: 20px;
-      line-height: 30px;
-      animation: ripple 1.5s linear infinite;
       transition: all 0.7s ease;
 
 
-      &:hover
-      {
-        transform: scale(1.1);
+      $highlight: darken($color, 10%);
+      $duration: 0.4s;
+      $sin:  0.866;
+      $size: 40px;
+
+      &, .left, .right, &:before {
+        display: inline-block;
+        vertical-align: middle;
+        transition: border $duration, width $duration, height $duration, margin $duration;
+        transition-tiomig-function: cubic-bezier(1, 0, 0, 1);
+      }
+
+      &:before {
+        content: "";
+        height: 100px;
+      }
+
+      &.pause {
+        animation: ripple 1.5s linear infinite;
+
+        .left, .right {
+          margin: 0;
+          border-left: $size*0.33 solid $color;
+          border-top: 0 solid transparent;
+          border-bottom: 0 solid transparent;
+          height: $size*$sin;
+        }
+
+        .left {
+          border-right: $size*0.2 solid transparent;
+        }
+      }
+
+      &.play {
+        $border: $size/4;
+
+        .left {
+          margin-left: $size/6;
+          border-left: $size*$sin/2 solid $color;
+          border-top: $border solid transparent;
+          border-bottom: $border solid transparent;
+          border-right: 0px solid transparent;
+          height: $size - 2*$border;
+        }
+
+        .right {
+          margin: 0;
+          border-left: $size*$sin/2 solid $color;
+          border-top: $border solid transparent;
+          border-bottom: $border solid transparent;
+          height: 0px;
+        }
+      }
+
+      &:hover {
+        border-color: $highlight;
+
+        .left, .right {
+          border-left-color: $highlight;
+        }
+      }
+
+      @keyframes ripple {
+        0% {
+          box-shadow: 0 0 0 0 rgba($color, 0.3),
+          0 0 0 1px rgba($color, 0.3),
+          0 0 0 3px rgba($color, 0.3),
+          0 0 0 5px rgba($color, 0.3);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba($color, 0.3),
+          0 0 0 4px rgba($color, 0.3),
+          0 0 0 20px rgba($color, 0),
+          0 0 0 30px rgba($color, 0);
+        }
       }
     }
-
-    @keyframes ripple {
-      0% {
-        box-shadow: 0 0 0 0 rgba($color, 0.3),
-        0 0 0 1px rgba($color, 0.3),
-        0 0 0 3px rgba($color, 0.3),
-        0 0 0 5px rgba($color, 0.3);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba($color, 0.3),
-        0 0 0 4px rgba($color, 0.3),
-        0 0 0 20px rgba($color, 0),
-        0 0 0 30px rgba($color, 0);
-      }
-    }
-
   }
-
 }
 
