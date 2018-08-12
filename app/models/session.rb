@@ -5,19 +5,16 @@ class Session < ApplicationRecord
 
   # TODO: validate presence of at least one block
 
-  DEFAULT_BLOCK_COUNT = 10
+  DEFAULT_SESSION_LENGTH = 60
   AVG_BLOCK_LENGTH = 4.seconds
 
-  def self.create_next(langs, session_length)
+  def self.create_next(langs, session_length = DEFAULT_SESSION_LENGTH)
     return unless langs.present?
-    return if session_length.present? && session_length.negative?
+    return unless session_length.present? && session_length.positive?
 
-    block_count = session_length.present? ? session_length / AVG_BLOCK_LENGTH : DEFAULT_BLOCK_COUNT
+    block_count = session_length / AVG_BLOCK_LENGTH
 
-    blocks = Block.with_audio
-                  .with_langs(langs)
-                  .order('RANDOM()')
-                  .limit(block_count)
+    blocks = Block.ready_for_session(langs, limit: block_count)
 
     Session.create(blocks: blocks)
   end

@@ -39,6 +39,13 @@ class Block < ApplicationRecord
     AudioBlockFactoryJob.perform_later(self)
   end
 
+  def self.ready_for_session(langs, limit:)
+    with_audio
+      .with_langs(langs)
+      .order(Arel.sql('RANDOM()'))
+      .limit(limit)
+  end
+
   def self.with_langs(langs)
     target_language = langs.target_language
 
