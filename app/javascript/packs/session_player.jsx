@@ -28,8 +28,8 @@ class SessionPlayer extends React.Component {
     return (
       <div>
         <div className="play-button-wrapper">
-          <div className={`play-button ${ this.state.playing ? 'pause' : 'play' }` } onClick={ () => this.playNextSession() }>
-            <span class="left"></span><span class="right"></span>
+          <div className={`play-button ${ this.state.playing ? 'pause' : 'play' }` } onClick={ () => this.togglePlay() }>
+            <span className="left"></span><span className="right"></span>
           </div>
         </div>
 
@@ -45,7 +45,6 @@ class SessionPlayer extends React.Component {
     )
   }
 
-
   incrementSessionDuration(){
     let oldValue = this.state.sessionDuration
 
@@ -60,18 +59,13 @@ class SessionPlayer extends React.Component {
       this.setState({ sessionDuration: oldValue - 1});
   }
 
-
   parseSession(data) {
     sessionData = data.data.nextSession
-    player = new Player(sessionData.blocks.map(block => { return block.audio }), this)
-    player.play()
-    this.setState({ playing: true });
+    this.player = new Player(sessionData.blocks.map(block => { return block.audio }), this)
+    this.play()
   }
 
   getNextSession(){
-    if(this.state.playing)
-      return
-
     client.query({
       query: gql`
     {
@@ -86,8 +80,29 @@ class SessionPlayer extends React.Component {
     }).then(result => this.parseSession(result));
   }
 
-  playNextSession(){
-    this.getNextSession()
+  togglePlay(){
+    if(!this.player)
+      this.getNextSession()
+
+    if(this.state.playing)
+      this.pause()
+
+    else if(this.player)
+      this.play()
+  }
+
+  pause(){
+    this.setState(
+      { playing: false },
+      () => this.player.pause()
+    );
+  }
+
+  play(){
+    this.setState(
+      { playing: true },
+      () => this.player.play()
+    );
   }
 
 }
