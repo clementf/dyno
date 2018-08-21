@@ -1,0 +1,35 @@
+// https://coolors.co/db5461-ffd9ce-593c8f-8ef9f3-171738
+
+$color: #ffd9ce;
+$light-color: #ffd9ce;
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: $light-color;
+  color: #171738;
+  height: 100%;
+  font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 10rem;
+}
+
+.presentation{
+  max-width: 40rem;
+  margin: auto;
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+}

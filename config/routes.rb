@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
 
   get '/app', to: 'webapp#setup'
+
+  root 'website#home'
 end
