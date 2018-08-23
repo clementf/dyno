@@ -1,7 +1,11 @@
 // https://coolors.co/db5461-ffd9ce-593c8f-8ef9f3-171738
 
-$color: #ffd9ce;
+$dark-color: #171738;
 $light-color: #ffd9ce;
+$red-color: #db5461;
+$purple-color: #593c8f;
+
+@import url('https://fonts.googleapis.com/css?family=Cabin');
 
 html {
   height: 100%;
@@ -9,20 +13,66 @@ html {
 
 body {
   background-color: $light-color;
-  color: #171738;
+  color: $dark-color;
   height: 100%;
   font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  text-decoration: none;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   padding: 1rem 10rem;
+  align-items: center;
+
+  .logo {
+    font-family: 'Cabin', sans-serif;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 120px;
+    }
+    .text {
+      color: $purple-color;
+      font-size:3rem;
+    }
+  }
+}
+
+.container-button {
+  text-align: center;
+  margin: 4rem auto;
+}
+
+.button {
+  padding: 15px 30px;
+
+  border: solid 2px $red-color;
+  color: $purple-color;
+  border-radius: 30px;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+
+  &:hover {
+    transition: 0.2s all;
+    color: $red-color;
+  }
 }
 
 .presentation{
   max-width: 40rem;
   margin: auto;
+  padding: 2rem;
+
+  .intro {
+    strong {
+      font-style: italic;
+    }
+  }
 
   h1 {
     font-size: 2.5rem;
