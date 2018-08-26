@@ -42,7 +42,7 @@ module TTS
 
       @text_converter.to_audio(text: text,
                                lang: @block.base_lang,
-                               filename: base_lang_audio_filepath)
+                               output_filepath: base_lang_audio_filepath)
     end
 
     def create_audio_target_lang
@@ -50,7 +50,7 @@ module TTS
 
       @text_converter.to_audio(text: text,
                                lang: @block.target_lang,
-                               filename: target_lang_audio_filepath)
+                               output_filepath: target_lang_audio_filepath)
     end
 
     def base_lang_audio_filepath

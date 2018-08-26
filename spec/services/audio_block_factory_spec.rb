@@ -31,13 +31,13 @@ describe TTS::AudioBlockFactory do
       expect(text_converter).to receive(:to_audio).with(
         text: block.content_for_base_lang + ', is',
         lang: block.base_lang,
-        filename: './tmp/blocks/_base_part.mp3'
+        output_filepath: './tmp/blocks/_base_part.mp3'
       )
 
       expect(text_converter).to receive(:to_audio).with(
         text: block.content_for_target_lang,
         lang: block.target_lang,
-        filename: './tmp/blocks/_target_part.mp3'
+        output_filepath: './tmp/blocks/_target_part.mp3'
       )
       expect(TTS::MP3).to receive(:concatenate)
       expect(factory).to receive(:attach_file_to_block).and_return(true)
