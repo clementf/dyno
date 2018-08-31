@@ -30,15 +30,18 @@ header {
 
   .logo {
     font-family: 'Cabin', sans-serif;
-    display: flex;
-    align-items: center;
 
-    img {
-      width: 120px;
-    }
-    .text {
-      color: $purple-color;
-      font-size:3rem;
+    a{
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 120px;
+      }
+      .text {
+        color: $purple-color;
+        font-size:3rem;
+      }
     }
   }
 }

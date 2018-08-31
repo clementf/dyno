@@ -13,10 +13,13 @@
   <body>
     <header>
       <div class="logo">
-        <%= image_tag('logo-only.svg') %>
-        <div class="text">dyno</div>
+        <a href="/">
+          <%= image_tag('logo-only.svg') %>
+          <div class="text">dyno</div>
+        </a>
       </div>
     </header>
+
     <%= yield %>
   </body>
 </html>
