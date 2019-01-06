@@ -1,4 +1,4 @@
-# Shreme
+# Dyno
 
 Backend services to manage content, users, requests from mobile apps
 

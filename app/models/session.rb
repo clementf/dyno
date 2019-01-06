@@ -8,6 +8,7 @@ class Session < ApplicationRecord
   DEFAULT_SESSION_LENGTH = 60
   AVG_BLOCK_LENGTH = 4.seconds
 
+  # TODO: move to a "session creator" class
   def self.create_next(langs, session_length = DEFAULT_SESSION_LENGTH)
     return unless langs.present?
     return unless session_length.present? && session_length.positive?
