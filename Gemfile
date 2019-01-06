@@ -29,6 +29,7 @@ group :development do
   gem 'foreman'
   gem 'graphiql-rails'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rails_real_favicon'
   gem 'rubocop'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
