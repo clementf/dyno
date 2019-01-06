@@ -7,6 +7,7 @@ class Player {
 
       return new Howl({
         src: [playlistItem],
+        pool: 1,
       });
     })
 
@@ -21,15 +22,16 @@ class Player {
     var sound     = this.playlist[this.currentPosition]
 
     var endOfPlaylist    = this.currentPosition == this.playlist.length - 1
-    this.currentPosition = endOfPlaylist ? 0 : this.currentPosition + 1
 
     if(endOfPlaylist){
       this.sessionManager.pause()
+      this.currentPosition = 0;
       return
     }
 
     sound.play()
     sound.on('end', function(){
+      hack_this.currentPosition = endOfPlaylist ? 0 : hack_this.currentPosition + 1
       if(!hack_this.sessionManager.state.playing)
         return
 
@@ -40,7 +42,10 @@ class Player {
   }
 
   pause(){
-    window.clearTimeout(this.nextSound)
+    var sound     = this.playlist[this.currentPosition]
+    sound.stop() // stop current word
+    sound.off('end') // unbind end event
+    window.clearTimeout(this.nextSound) // Dont play next word
   }
 }
 

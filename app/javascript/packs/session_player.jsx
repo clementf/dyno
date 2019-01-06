@@ -81,13 +81,14 @@ class SessionPlayer extends React.Component {
   }
 
   togglePlay(){
-    if(!this.player)
+    if(!this.player){
       this.getNextSession()
+      return;
+    }
 
     if(this.state.playing)
       this.pause()
-
-    else if(this.player)
+    else
       this.play()
   }
 
