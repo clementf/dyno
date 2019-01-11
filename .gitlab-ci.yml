@@ -35,6 +35,7 @@ before_script:
 stages:
   - test
   - lint
+  - deploy
 
 Tests:
   stage: test
@@ -48,3 +49,17 @@ Pronto:
     - master
   script:
     - bundle exec pronto run -f gitlab -c origin/master
+
+variables:
+  APP_NAME: staging-dyno
+
+deploy:
+  image: ilyasemenov/gitlab-ci-git-push
+  stage: deploy
+  environment:
+    name: production
+    url: https://dev.backpacking.fr/
+  only:
+    - master
+  script:
+    - git-push ssh://dokku@backpacking.fr/$APP_NAME
