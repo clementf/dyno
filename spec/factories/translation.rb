@@ -2,7 +2,10 @@
 
 FactoryBot.define do
   factory :translation do
-    content 'Content of the translation'
+    sequence :content do |n|
+      "Content of the translation #{n}"
+    end
+
     association :original, factory: :sentence
 
     transient do

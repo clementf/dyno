@@ -3,6 +3,8 @@
 class Sentence < ApplicationRecord
   include Translatable
 
+  validates_uniqueness_of :content, allow_nil: false
+
   def translations
     Translation.where(original: self)
   end
