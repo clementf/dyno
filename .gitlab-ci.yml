@@ -32,6 +32,12 @@ before_script:
   - bundle exec rails db:create RAILS_ENV=test
   - bundle exec rails db:schema:load RAILS_ENV=test
 
+  # ssh keys setup
+  - mkdir -p ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - ssh-keyscan -H 'backpacking.fr' >> ~/.ssh/known_hosts
+
 stages:
   - test
   - lint
@@ -54,12 +60,8 @@ variables:
   APP_NAME: staging-dyno
 
 deploy:
-  image: ilyasemenov/gitlab-ci-git-push
   stage: deploy
-  environment:
-    name: production
-    url: https://dev.backpacking.fr/
   only:
     - master
   script:
-    - git-push ssh://dokku@backpacking.fr/$APP_NAME
+    - git-push dokku@backpacking.fr:staging-dyno master
