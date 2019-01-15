@@ -64,4 +64,4 @@ deploy:
   only:
     - master
   script:
-    - git-push dokku@backpacking.fr:staging-dyno master
+    - git push dokku@backpacking.fr:staging-dyno master
