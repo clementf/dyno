@@ -20,6 +20,7 @@ class SessionPlayer extends React.Component {
 
     this.state = {
       playing: false,
+      loading: false,
       sessionDuration: 1
     };
   }
@@ -62,10 +63,13 @@ class SessionPlayer extends React.Component {
   parseSession(data) {
     sessionData = data.data.nextSession
     this.player = new Player(sessionData.blocks.map(block => { return block.audio }), this)
+    this.setState({loading: false})
     this.play()
   }
 
   getNextSession(){
+    this.setState({loading: true})
+
     client.query({
       query: gql`
     {
@@ -81,6 +85,9 @@ class SessionPlayer extends React.Component {
   }
 
   togglePlay(){
+    if(this.state.loading)
+      return;
+
     if(!this.player){
       this.getNextSession()
       return;
