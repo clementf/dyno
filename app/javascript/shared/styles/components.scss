@@ -1,0 +1,15 @@
+@mixin button {
+  padding: 15px 30px;
+  cursor: pointer;
+  background-color: $red-color;
+  color: #fff;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.3rem;
+
+  &:hover {
+    transition: 0.2s all;
+    background-color: darken($red-color, 5%);
+  }
+}
+

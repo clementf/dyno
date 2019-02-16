@@ -11,9 +11,17 @@
     <%= stylesheet_pack_tag 'website' %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <body class="<%= devise_controller? ? "devise" : "dyno"%>">
+
+    <div class="flashes">
+      <% flash.each do |name, msg| %>
+        <% if name.in?(['notice', 'alert']) && msg.present? %>
+          <p class="<%= name %>">
+            <%= msg %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
 
     <header>
       <div class="logo">
@@ -24,6 +32,8 @@
       </div>
     </header>
 
-    <%= yield %>
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>

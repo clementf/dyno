@@ -1,19 +1,37 @@
 @import '../../shared/styles/colors';
+@import '../../shared/styles/components';
 @import url('https://fonts.googleapis.com/css?family=Cabin');
 
 html {
   height: 100%;
+  margin: 0;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background-color: $light-color;
   color: $dark-color;
   height: 100%;
+  margin: 0;
   font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
   text-decoration: none;
+}
+
+.flashes {
+  margin: 0;
+
+  .notice, .alert {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+  }
 }
 
 header {
@@ -46,17 +64,7 @@ header {
 }
 
 .button {
-  padding: 15px 30px;
-
-  background-color: $red-color;
-  color: $light-color;
-  border-radius: 30px;
-  font-size: 1.3rem;
-
-  &:hover {
-    transition: 0.2s all;
-    background-color: darken($red-color, 5%);
-  }
+  @include button;
 }
 
 .presentation{
