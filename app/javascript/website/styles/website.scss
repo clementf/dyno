@@ -1,10 +1,4 @@
-// https://coolors.co/db5461-ffd9ce-593c8f-8ef9f3-171738
-
-$dark-color: #171738;
-$light-color: #ffd9ce;
-$red-color: #db5461;
-$purple-color: #593c8f;
-
+@import '../../shared/styles/colors';
 @import url('https://fonts.googleapis.com/css?family=Cabin');
 
 html {
@@ -54,15 +48,14 @@ header {
 .button {
   padding: 15px 30px;
 
-  border: solid 2px $red-color;
-  color: $purple-color;
+  background-color: $red-color;
+  color: $light-color;
   border-radius: 30px;
   font-size: 1.3rem;
-  text-transform: uppercase;
 
   &:hover {
     transition: 0.2s all;
-    color: $red-color;
+    background-color: darken($red-color, 5%);
   }
 }
 

@@ -1,6 +1,4 @@
-// https://coolors.co/db5461-ffd9ce-593c8f-8ef9f3-171738
-
-$color: #db5461;
+@import '../../shared/styles/colors';
 
 #session-player{
   display: flex;
@@ -25,10 +23,8 @@ $color: #db5461;
     height: 100px;
     width: 100px;
 
-    background-color: #593c8f;
+    background-color: $red-color;
     border-radius: 50%;
-
-    border: 3px solid #171738;
 
     display: flex;
     margin: auto;
@@ -44,7 +40,7 @@ $color: #db5461;
       transition: all 0.7s ease;
 
 
-      $highlight: darken($color, 10%);
+      $highlight: darken($light-color, 10%);
       $duration: 0.4s;
       $sin:  0.866;
       $size: 40px;
@@ -66,7 +62,7 @@ $color: #db5461;
 
         .left, .right {
           margin: 0;
-          border-left: $size*0.33 solid $color;
+          border-left: $size*0.33 solid $light-color;
           border-top: 0 solid transparent;
           border-bottom: 0 solid transparent;
           height: $size*$sin;
@@ -82,7 +78,7 @@ $color: #db5461;
 
         .left {
           margin-left: $size/6;
-          border-left: $size*$sin/2 solid $color;
+          border-left: $size*$sin/2 solid $light-color;
           border-top: $border solid transparent;
           border-bottom: $border solid transparent;
           border-right: 0px solid transparent;
@@ -91,7 +87,7 @@ $color: #db5461;
 
         .right {
           margin: 0;
-          border-left: $size*$sin/2 solid $color;
+          border-left: $size*$sin/2 solid $light-color;
           border-top: $border solid transparent;
           border-bottom: $border solid transparent;
           height: 0px;
@@ -108,16 +104,16 @@ $color: #db5461;
 
       @keyframes ripple {
         0% {
-          box-shadow: 0 0 0 0 rgba($color, 0.3),
-          0 0 0 1px rgba($color, 0.3),
-          0 0 0 3px rgba($color, 0.3),
-          0 0 0 5px rgba($color, 0.3);
+          box-shadow: 0 0 0 0 rgba($red-color, 0.3),
+          0 0 0 1px rgba($red-color, 0.3),
+          0 0 0 3px rgba($red-color, 0.3),
+          0 0 0 5px rgba($red-color, 0.3);
         }
         100% {
-          box-shadow: 0 0 0 0 rgba($color, 0.3),
-          0 0 0 4px rgba($color, 0.3),
-          0 0 0 20px rgba($color, 0),
-          0 0 0 30px rgba($color, 0);
+          box-shadow: 0 0 0 0 rgba($red-color, 0.3),
+          0 0 0 4px rgba($red-color, 0.3),
+          0 0 0 20px rgba($red-color, 0),
+          0 0 0 30px rgba($red-color, 0);
         }
       }
     }
