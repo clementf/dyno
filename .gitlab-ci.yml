@@ -59,9 +59,12 @@ Pronto:
 variables:
   APP_NAME: staging-dyno
 
-deploy:
+deploy_staging:
   stage: deploy
   only:
     - master
+  environment:
+    name: staging
+    url: https://dev.backpacking.fr
   script:
     - git push dokku@backpacking.fr:staging-dyno master
