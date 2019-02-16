@@ -2,6 +2,7 @@
 
 class Session < ApplicationRecord
   has_and_belongs_to_many :blocks
+  belongs_to :user, optional: true
 
   # TODO: validate presence of at least one block
 
@@ -9,7 +10,7 @@ class Session < ApplicationRecord
   AVG_BLOCK_LENGTH = 4.seconds
 
   # TODO: move to a "session creator" class
-  def self.create_next(langs, session_length = DEFAULT_SESSION_LENGTH)
+  def self.create_next(langs, session_length = DEFAULT_SESSION_LENGTH, user = nil)
     return unless langs.present?
     return unless session_length.present? && session_length.positive?
 
@@ -17,6 +18,6 @@ class Session < ApplicationRecord
 
     blocks = Block.ready_for_session(langs, limit: block_count)
 
-    Session.create(blocks: blocks)
+    Session.create(blocks: blocks, user: user)
   end
 end

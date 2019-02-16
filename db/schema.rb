@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_06_152155) do
+ActiveRecord::Schema.define(version: 2019_02_12_182106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 2019_01_06_152155) do
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "translations", force: :cascade do |t|
@@ -102,6 +104,7 @@ ActiveRecord::Schema.define(version: 2019_01_06_152155) do
 
   add_foreign_key "blocks", "sentences"
   add_foreign_key "blocks", "translations"
+  add_foreign_key "sessions", "users"
   add_foreign_key "translations", "languages"
   add_foreign_key "translations", "sentences", column: "original_id"
 end
