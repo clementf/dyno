@@ -83,9 +83,9 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.action_mailer.default_url_options = { host: 'learnwithdyno.com' }
+  config.action_mailer.default_url_options = { host: 'learnwithdyno.com', protocol: 'https' }
   config.action_mailer.asset_host = 'learnwithdyno.com'
-  config.action_mailer.default_asset_host_protocol = :http
+  config.action_mailer.default_asset_host_protocol = :https
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
