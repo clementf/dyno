@@ -6,6 +6,7 @@ SimpleCov.start 'rails' do
   add_filter '/spec/'
   add_filter '/config/'
   add_filter '/lib/'
+  add_filter '/dashboards/'
 end
 
 RSpec.configure do |config|
