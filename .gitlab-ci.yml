@@ -53,19 +53,34 @@ Pronto:
     - bundle exec pronto run -f gitlab -c origin/master
 
 variables:
-  APP_NAME: staging-dyno
+  APP_NAME: dyno
 
 deploy_staging:
   before_script:
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H 'backpacking.fr' >> ~/.ssh/known_hosts
+    - ssh-keyscan -H 'learnwithdyno.com' >> ~/.ssh/known_hosts
+  stage: deploy
+  only:
+    - develop
+  environment:
+    name: staging
+    url: https://staging.learnwithdyno.com
+  script:
+    - git push dokku@learnwithdyno.com:staging-dyno master
+
+deploy_production:
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H 'learnwithdyno.com' >> ~/.ssh/known_hosts
   stage: deploy
   only:
     - master
   environment:
-    name: staging
-    url: https://dev.backpacking.fr
+    name: production
+    url: https://learnwithdyno.com
   script:
-    - git push dokku@backpacking.fr:staging-dyno master
+    - git push dokku@learnwithdyno.com:dyno master
