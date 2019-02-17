@@ -32,12 +32,6 @@ before_script:
   - bundle exec rails db:create RAILS_ENV=test
   - bundle exec rails db:schema:load RAILS_ENV=test
 
-  # ssh keys setup
-  - mkdir -p ~/.ssh
-  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-  - chmod 600 ~/.ssh/id_rsa
-  - ssh-keyscan -H 'backpacking.fr' >> ~/.ssh/known_hosts
-
 stages:
   - test
   - lint
@@ -49,6 +43,8 @@ Tests:
     - bundle exec rspec
 
 Pronto:
+  before_script:
+    - gem install pronto-rubocop
   stage: lint
   allow_failure: true
   except:
@@ -60,6 +56,11 @@ variables:
   APP_NAME: staging-dyno
 
 deploy_staging:
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H 'backpacking.fr' >> ~/.ssh/known_hosts
   stage: deploy
   only:
     - master

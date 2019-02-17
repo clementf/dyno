@@ -26,4 +26,6 @@ Rails.application.routes.draw do
       root to: 'users#index'
     end
   end
+
+  get '/health', to: proc { [200, {}, ['healthy']] }
 end
