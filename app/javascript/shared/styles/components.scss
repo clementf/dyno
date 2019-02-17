@@ -7,6 +7,10 @@
   border: none;
   font-size: 1.3rem;
 
+  a {
+    color: #fff;
+  }
+
   &:hover {
     transition: 0.2s all;
     background-color: darken($red-color, 5%);

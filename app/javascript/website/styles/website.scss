@@ -56,6 +56,12 @@ header {
       }
     }
   }
+
+  .current-user {
+    a {
+      color: $dark-color;
+    }
+  }
 }
 
 .container-button {
