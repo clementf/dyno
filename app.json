@@ -1,0 +1,11 @@
+{
+  "name": "dyno",
+  "description": "Learn words on the go",
+  "keywords": [
+  ],
+  "scripts": {
+    "dokku": {
+      "postdeploy": "bundle exec rake db:migrate"
+    }
+  }
+}
