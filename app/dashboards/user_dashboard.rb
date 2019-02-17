@@ -52,8 +52,6 @@ class UserDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :email,
-    :encrypted_password,
-    :reset_password_token,
     :reset_password_sent_at,
     :remember_created_at,
     :sign_in_count,
