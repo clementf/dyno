@@ -21,29 +21,48 @@ class SessionPlayer extends React.Component {
     this.state = {
       playing: false,
       loading: false,
+      showLogin: false,
       sessionDuration: 1
     };
   }
 
   render(){
-    return (
-      <div>
-        <div className="play-button-wrapper">
-          <div className={`play-button ${ this.state.playing ? 'pause' : 'play' }` } onClick={ () => this.togglePlay() }>
-            <span className="left"></span><span className="right"></span>
+    if(this.state.showLogin == true) {
+      return (
+        <div>
+          <p className="content-inner">
+            <strong>
+              Well done! A little bit of this everyday and you'll rock it! ✌ <br/>
+            </strong>
+            <strong>
+              Register to keep track of your progress and get new tailored content.
+            </strong>
+          </p>
+            <a className="button" href="/users/sign_up">Register</a>
+        </div>
+        )
+    }
+
+    else {
+      return (
+        <div>
+          <div className="play-button-wrapper">
+            <div className={`play-button ${ this.state.playing ? 'pause' : 'play' }` } onClick={ () => this.togglePlay() }>
+              <span className="left"></span><span className="right"></span>
+            </div>
+          </div>
+
+          <div className="controls-wrapper">
+            <span className="controls" onClick={ () => this.decrementSessionDuration() }>-</span>
+            <span>
+              <div>{ this.state.sessionDuration }</div>
+              <div>min</div>
+            </span>
+            <span className="controls" onClick={ () => this.incrementSessionDuration() }>+</span>
           </div>
         </div>
-
-        <div className="controls-wrapper">
-          <span className="controls" onClick={ () => this.decrementSessionDuration() }>-</span>
-          <span>
-            <div>{ this.state.sessionDuration }</div>
-            <div>min</div>
-          </span>
-          <span className="controls" onClick={ () => this.incrementSessionDuration() }>+</span>
-        </div>
-      </div>
-    )
+      )
+    }
   }
 
   incrementSessionDuration(){
@@ -111,6 +130,16 @@ class SessionPlayer extends React.Component {
       { playing: true },
       () => this.player.play()
     );
+  }
+
+  finish(){
+    if(!loggedIn) {
+      this.setState(
+        {
+          showLogin: true
+        }
+      )
+    }
   }
 
 }

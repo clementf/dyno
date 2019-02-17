@@ -1,10 +1,18 @@
-<div class="presentation">
+<div class="presentation content-inner">
   <div class="intro">
     <p><strong>Good to see you here!</strong></p>
-    <p>Here's the start of your Dutch practise!</p>
-    <p>Click on that big button below to get to know some of the most commonly used Dutch words.</p>
+    <p>Here's the start of your Dutch practise. Click on that big button below to get to know some of the most commonly used Dutch words.</p>
   </div>
 </div>
+
+<script>
+  <% if current_user.present? %>
+      var loggedIn = true;
+  <% else %>
+      var loggedIn = false;
+  <% end %>
+</script>
+
 <div id="session-player"></div>
 
 <%= javascript_pack_tag 'session_player' %>

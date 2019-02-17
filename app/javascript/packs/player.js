@@ -25,6 +25,7 @@ class Player {
 
     if(endOfPlaylist){
       this.sessionManager.pause()
+      this.sessionManager.finish()
       this.currentPosition = 0;
       return
     }
