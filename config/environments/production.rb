@@ -91,4 +91,15 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Install the Timber.io logger, send logs over STDOUT. Actual log delivery
+  # to the Timber service is handled external of this application.
+  http_device = Timber::LogDevices::HTTP.new(ENV['TIMBER_API_KEY'])
+  file_device = File.open("#{Rails.root}/log/production.log", 'a')
+  file_device.binmode
+  log_devices = [http_device, file_device]
+
+  logger = Timber::Logger.new(*log_devices)
+  logger.level = config.log_level
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
 end

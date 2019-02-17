@@ -20,6 +20,8 @@ gem 'rails', '~> 5.2.0'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq', '~> 5.1.3'
 
+gem 'timber', '~> 2.6'
+
 gem 'graphql'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 3.5'
