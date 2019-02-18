@@ -12,6 +12,7 @@ gem 'aws-sdk-s3', '~> 1.17.0'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '~> 4.4.3'
+gem 'devise-async', '~> 1.0.0'
 gem 'jbuilder', '~> 2.5'
 gem 'letter_opener', '~> 1.7.0'
 gem 'pg', '>= 0.18', '< 2.0'
