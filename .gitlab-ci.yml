@@ -44,6 +44,7 @@ Tests:
 
 Pronto:
   before_script:
+    - apt-get update -yq
     - apt-get install cmake
     - gem install pronto-rubocop
   stage: lint
