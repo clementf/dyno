@@ -79,7 +79,7 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  host = ENV.fetch('HOST', 'learnwithdyno.com')
+  host = ENV.fetch('EMAIL_HOST', 'learnwithdyno.com')
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   config.action_mailer.asset_host = host
   config.action_mailer.default_asset_host_protocol = :https
