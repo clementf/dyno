@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'info@learnwithdyno.com'
+  default from: 'Learn with Dyno <info@learnwithdyno.com>'
   layout 'mailer'
 end
