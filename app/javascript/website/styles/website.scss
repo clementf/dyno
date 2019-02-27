@@ -32,6 +32,7 @@ p {
 
 .flashes {
   margin: 0;
+  text-align: center;
 
   .notice, .alert {
     display: flex;
@@ -45,6 +46,10 @@ header {
   justify-content: space-between;
   padding: 1rem 5rem;
   align-items: center;
+
+  @media screen and (max-width: 900px) {
+    padding: 1rem 2rem;
+  }
 
   .logo {
     font-family: 'Cabin', sans-serif;

@@ -7,6 +7,10 @@
     margin: auto;
     text-align: center;
 
+    @media screen and (max-width: 900px) {
+      width: 100%;
+    }
+
     .new_user {
       background-color: #fff;
       display: flex;
@@ -35,6 +39,7 @@
           outline: 0;
           margin-top: 5px;
           -webkit-appearance: textfield;
+
         }
       }
 

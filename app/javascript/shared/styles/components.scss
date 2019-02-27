@@ -5,7 +5,7 @@
   color: #fff;
   border-radius: 30px;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   display: inline-block;
 
   a {
@@ -15,6 +15,10 @@
   &:hover {
     transition: 0.2s all;
     background-color: darken($red-color, 5%);
+  }
+
+  @media screen and (max-width: 900px) {
+    white-space: initial;
   }
 }
 
