@@ -70,7 +70,7 @@ deploy_staging:
     name: staging
     url: https://staging.learnwithdyno.com
   script:
-    - git push dokku@learnwithdyno.com:staging-dyno develop:master
+    - git push dokku@learnwithdyno.com:staging-dyno master
 
 deploy_production:
   before_script:
