@@ -7,6 +7,7 @@
   border: none;
   font-size: 1.2rem;
   display: inline-block;
+  white-space: initial;
 
   a {
     color: #fff;
@@ -16,9 +17,4 @@
     transition: 0.2s all;
     background-color: darken($red-color, 5%);
   }
-
-  @media screen and (max-width: 900px) {
-    white-space: initial;
-  }
 }
-
