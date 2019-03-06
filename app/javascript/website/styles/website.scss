@@ -16,7 +16,9 @@ html {
 body {
   background-color: $light-color;
   color: $dark-color;
-  height: 100%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   margin: 0;
   font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -83,6 +85,10 @@ header {
 
 .button {
   @include button;
+}
+
+.content {
+  flex: 1;
 }
 
 .content-inner {
