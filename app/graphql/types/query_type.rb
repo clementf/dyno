@@ -11,6 +11,6 @@ class Types::QueryType < GraphQL::Schema::Object
   def next_session(**args)
     default_langs = Langs.new('en', 'nl')
 
-    Session.create_next(default_langs, args[:length], @context[:current_user])
+    SessionFactory.create(default_langs, args[:length], @context[:current_user])
   end
 end
