@@ -31,6 +31,7 @@ gem 'webpacker', '~> 3.5'
 group :development, :test do
   gem 'awesome_print'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem 'pronto'
   gem 'pronto-rubocop', require: false
 end
