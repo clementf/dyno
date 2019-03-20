@@ -4,16 +4,16 @@ import ApolloClient from "apollo-boost";
 import gql from "graphql-tag";
 import Player from './player.js'
 
-import '../session_player/styles/session_player'
+import '../lesson_player/styles/lesson_player'
 
 const client = new ApolloClient({
   uri: "/graphql"
 });
 
-let sessionData = {}
+let lessonData = {}
 let player;
 
-class SessionPlayer extends React.Component {
+class LessonPlayer extends React.Component {
 
   constructor(props){
     super(props)
@@ -22,7 +22,7 @@ class SessionPlayer extends React.Component {
       playing: false,
       loading: false,
       showLogin: false,
-      sessionDuration: 1
+      lessonDuration: 1
     };
   }
 
@@ -53,46 +53,46 @@ class SessionPlayer extends React.Component {
           </div>
 
           <div className="controls-wrapper">
-            <span className="controls" onClick={ () => this.decrementSessionDuration() }>-</span>
+            <span className="controls" onClick={ () => this.decrementLessonDuration() }>-</span>
             <span>
-              <div>{ this.state.sessionDuration }</div>
+              <div>{ this.state.lessonDuration }</div>
               <div>min</div>
             </span>
-            <span className="controls" onClick={ () => this.incrementSessionDuration() }>+</span>
+            <span className="controls" onClick={ () => this.incrementLessonDuration() }>+</span>
           </div>
         </div>
       )
     }
   }
 
-  incrementSessionDuration(){
-    let oldValue = this.state.sessionDuration
+  incrementLessonDuration(){
+    let oldValue = this.state.lessonDuration
 
     if(oldValue < 10)
-      this.setState({ sessionDuration: oldValue + 1});
+      this.setState({ lessonDuration: oldValue + 1});
   }
 
-  decrementSessionDuration(){
-    let oldValue = this.state.sessionDuration
+  decrementLessonDuration(){
+    let oldValue = this.state.lessonDuration
 
     if(oldValue > 1)
-      this.setState({ sessionDuration: oldValue - 1});
+      this.setState({ lessonDuration: oldValue - 1});
   }
 
-  parseSession(data) {
-    sessionData = data.data.nextSession
-    this.player = new Player(sessionData.blocks.map(block => { return block.audio }), this)
+  parseLesson(data) {
+    lessonData = data.data.nextLesson
+    this.player = new Player(lessonData.blocks.map(block => { return block.audio }), this)
     this.setState({loading: false})
     this.play()
   }
 
-  getNextSession(){
+  getNextLesson(){
     this.setState({loading: true})
 
     client.query({
       query: gql`
     {
-      nextSession(length: ${this.state.sessionDuration * 60} ) {
+      nextLesson(length: ${this.state.lessonDuration * 60} ) {
         blocks {
           transcript
           audio
@@ -100,7 +100,7 @@ class SessionPlayer extends React.Component {
       }
     }
     `
-    }).then(result => this.parseSession(result));
+    }).then(result => this.parseLesson(result));
   }
 
   togglePlay(){
@@ -108,7 +108,7 @@ class SessionPlayer extends React.Component {
       return;
 
     if(!this.player){
-      this.getNextSession()
+      this.getNextLesson()
       return;
     }
 
@@ -146,8 +146,8 @@ class SessionPlayer extends React.Component {
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <SessionPlayer/>,
-    document.getElementById('session-player')
+    <LessonPlayer/>,
+    document.getElementById('lesson-player')
   )
 })
 

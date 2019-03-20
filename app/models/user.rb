@@ -7,5 +7,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :async
 
-  has_many :sessions
+  has_many :lessons
 end

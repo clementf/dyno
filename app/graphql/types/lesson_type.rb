@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class Types::SessionType < GraphQL::Schema::Object
-  graphql_name 'Session'
-  description 'Represents a session'
+class Types::LessonType < GraphQL::Schema::Object
+  graphql_name 'Lesson'
+  description 'Represents a lesson'
 
   field :id, ID, null: false
   field :blocks, [Types::BlockType], null: true

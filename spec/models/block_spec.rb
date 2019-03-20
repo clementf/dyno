@@ -5,7 +5,7 @@ require 'rails_helper'
 describe Block do
   it { is_expected.to belong_to(:translation) }
   it { is_expected.to belong_to(:target_language) }
-  it { is_expected.to have_and_belong_to_many(:sessions) }
+  it { is_expected.to have_and_belong_to_many(:lessons) }
 
   describe BlockValidator do
     context 'when target and base language are different' do

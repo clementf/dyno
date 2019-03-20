@@ -8,7 +8,7 @@ class BlockDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    sessions: Field::HasMany,
+    lessons: Field::HasMany,
     translation: Field::BelongsTo,
     sentence: Field::BelongsTo,
     target_language: Field::BelongsTo.with_options(class_name: "Language"),
@@ -25,14 +25,14 @@ class BlockDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :sessions,
+    :lessons,
     :translation,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :sessions,
+    :lessons,
     :translation,
     :sentence,
     :target_language,
@@ -47,7 +47,7 @@ class BlockDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :sessions,
+    :lessons,
     :translation,
     :sentence,
     :target_language,

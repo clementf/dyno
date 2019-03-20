@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :blocks
       resources :languages
       resources :sentences
-      resources :sessions
+      resources :lessons
       resources :translations
 
       root to: 'users#index'

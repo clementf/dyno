@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_12_182106) do
+ActiveRecord::Schema.define(version: 2019_03_20_195140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(version: 2019_02_12_182106) do
     t.index ["translation_id"], name: "index_blocks_on_translation_id"
   end
 
-  create_table "blocks_sessions", id: false, force: :cascade do |t|
-    t.bigint "session_id"
+  create_table "blocks_lessons", id: false, force: :cascade do |t|
+    t.bigint "lesson_id"
     t.bigint "block_id"
-    t.index ["block_id"], name: "index_blocks_sessions_on_block_id"
-    t.index ["session_id"], name: "index_blocks_sessions_on_session_id"
+    t.index ["block_id"], name: "index_blocks_lessons_on_block_id"
+    t.index ["lesson_id"], name: "index_blocks_lessons_on_lesson_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -61,17 +61,17 @@ ActiveRecord::Schema.define(version: 2019_02_12_182106) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lessons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_lessons_on_user_id"
+  end
+
   create_table "sentences", force: :cascade do |t|
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "translations", force: :cascade do |t|
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 2019_02_12_182106) do
 
   add_foreign_key "blocks", "sentences"
   add_foreign_key "blocks", "translations"
-  add_foreign_key "sessions", "users"
+  add_foreign_key "lessons", "users"
   add_foreign_key "translations", "languages"
   add_foreign_key "translations", "sentences", column: "original_id"
 end

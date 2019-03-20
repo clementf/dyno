@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class SessionDashboard < Administrate::BaseDashboard
+class LessonDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -45,11 +45,4 @@ class SessionDashboard < Administrate::BaseDashboard
     :blocks,
     :user
   ].freeze
-
-  # Overwrite this method to customize how sessions are displayed
-  # across all pages of the admin dashboard.
-  #
-  # def display_resource(session)
-  #   "Session ##{session.id}"
-  # end
 end

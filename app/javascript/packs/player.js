@@ -1,8 +1,8 @@
 import { Howl, Howler } from 'howler';
 
 class Player {
-  constructor(playlistElems, sessionManager) {
-    this.sessionManager = sessionManager
+  constructor(playlistElems, lessonManager) {
+    this.lessonManager = lessonManager
     this.playlist = playlistElems.map(playlistItem => {
 
       return new Howl({
@@ -15,7 +15,7 @@ class Player {
   }
 
   play(){
-    if(!this.sessionManager.state.playing)
+    if(!this.lessonManager.state.playing)
       return
 
     var hack_this = this
@@ -24,8 +24,8 @@ class Player {
     var endOfPlaylist    = this.currentPosition == this.playlist.length - 1
 
     if(endOfPlaylist){
-      this.sessionManager.pause()
-      this.sessionManager.finish()
+      this.lessonManager.pause()
+      this.lessonManager.finish()
       this.currentPosition = 0;
       return
     }
@@ -33,7 +33,7 @@ class Player {
     sound.play()
     sound.on('end', function(){
       hack_this.currentPosition = endOfPlaylist ? 0 : hack_this.currentPosition + 1
-      if(!hack_this.sessionManager.state.playing)
+      if(!hack_this.lessonManager.state.playing)
         return
 
       hack_this.nextSound = window.setTimeout(function(){

@@ -2,7 +2,7 @@
 
 class Block < ApplicationRecord
   has_one_attached :audio
-  has_and_belongs_to_many :sessions
+  has_and_belongs_to_many :lessons
   belongs_to :translation, optional: true
   belongs_to :sentence, optional: true
   belongs_to :target_language, class_name:  'Language',
@@ -39,7 +39,7 @@ class Block < ApplicationRecord
     AudioBlockFactoryJob.perform_later(self)
   end
 
-  def self.ready_for_session(langs, limit:)
+  def self.ready_for_lesson(langs, limit:)
     with_audio
       .with_langs(langs)
       .order(Arel.sql('RANDOM()'))
