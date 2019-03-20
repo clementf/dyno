@@ -1,8 +1,18 @@
 # frozen_string_literal: true
 
 module Translatable
+  extend ActiveSupport::Concern
+
+  included do
+    has_one_attached :audio
+  end
+
   def lang
     language.lang
+  end
+
+  def create_audio
+    AudioTranslatableFactoryJob.perform_later(self)
   end
 
   def create_block(target_lang = 'en')
