@@ -1,5 +1,29 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: blocks
+#
+#  id                 :bigint(8)        not null, primary key
+#  transcript         :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  sentence_id        :bigint(8)
+#  target_language_id :integer
+#  translation_id     :bigint(8)
+#
+# Indexes
+#
+#  index_blocks_on_sentence_id         (sentence_id)
+#  index_blocks_on_target_language_id  (target_language_id)
+#  index_blocks_on_translation_id      (translation_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (sentence_id => sentences.id)
+#  fk_rails_...  (translation_id => translations.id)
+#
+
 class Block < ApplicationRecord
   has_one_attached :audio
   has_and_belongs_to_many :lessons

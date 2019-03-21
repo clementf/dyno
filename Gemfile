@@ -37,6 +37,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'foreman'
   gem 'graphiql-rails'
   gem 'listen', '>= 3.0.5', '< 3.2'
