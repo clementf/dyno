@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_195140) do
+ActiveRecord::Schema.define(version: 2019_03_21_220022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2019_03_20_195140) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "target_language_id"
+    t.index ["target_language_id"], name: "index_lessons_on_target_language_id"
     t.index ["user_id"], name: "index_lessons_on_user_id"
   end
 
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(version: 2019_03_20_195140) do
 
   add_foreign_key "blocks", "sentences"
   add_foreign_key "blocks", "translations"
+  add_foreign_key "lessons", "languages", column: "target_language_id"
   add_foreign_key "lessons", "users"
   add_foreign_key "translations", "languages"
   add_foreign_key "translations", "sentences", column: "original_id"

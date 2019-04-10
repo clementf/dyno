@@ -14,6 +14,6 @@ module LessonFactory
 
     return unless blocks.present?
 
-    Lesson.create(blocks: blocks, user: user)
+    Lesson.create!(blocks: blocks, user: user, target_language: langs.target_language)
   end
 end

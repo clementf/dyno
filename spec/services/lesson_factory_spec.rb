@@ -12,7 +12,7 @@ describe LessonFactory do
       end
     end
 
-    context 'wrong lesson legnth' do
+    context 'wrong lesson length' do
       it 'return nil' do
         expect(LessonFactory.create(langs, 0)).to eq nil
       end
