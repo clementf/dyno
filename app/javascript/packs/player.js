@@ -1,12 +1,12 @@
 import { Howl, Howler } from 'howler';
 
 class Player {
-  constructor(playlistElems, lessonManager) {
+  constructor(audio, lessonManager) {
     this.lessonManager = lessonManager
-    this.playlist = playlistElems.map(playlistItem => {
+    this.playlist = audio.map(item => {
 
       return new Howl({
-        src: [playlistItem],
+        src: [item],
         pool: 1,
       });
     })
@@ -36,9 +36,12 @@ class Player {
       if(!hack_this.lessonManager.state.playing)
         return
 
+      // Every word is a playlist item, so pause a little longer every two
+      let waitTime = hack_this.currentPosition % 2 == 1 ? 500 : 1500
+
       hack_this.nextSound = window.setTimeout(function(){
         hack_this.play();
-      }, 1500)
+      }, waitTime)
     });
   }
 

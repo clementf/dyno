@@ -81,7 +81,9 @@ class LessonPlayer extends React.Component {
 
   parseLesson(data) {
     lessonData = data.data.nextLesson
-    this.player = new Player(lessonData.blocks.map(block => { return block.audio }), this)
+    this.player = new Player(lessonData.blocks.map(block => {
+      return [block.original.audio, block.translation.audio ]
+    }).flat(), this)
     this.setState({loading: false})
     this.play()
   }
@@ -94,8 +96,14 @@ class LessonPlayer extends React.Component {
     {
       nextLesson(length: ${this.state.lessonDuration * 60} ) {
         blocks {
-          transcript
-          audio
+          original {
+            content,
+            audio
+          },
+          translation {
+            content,
+            audio
+          }
         }
       }
     }

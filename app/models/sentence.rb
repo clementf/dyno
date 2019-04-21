@@ -30,6 +30,7 @@ class Sentence < ApplicationRecord
   end
 
   def self.ready_for_lesson(limit:)
+    # TODO: check that translation has audio
     with_audio
       .limit(limit)
       .order(Arel.sql('RANDOM()'))
