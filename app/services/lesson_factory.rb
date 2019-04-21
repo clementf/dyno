@@ -10,10 +10,15 @@ module LessonFactory
 
     block_count = lesson_length / AVG_BLOCK_LENGTH
 
-    blocks = Block.ready_for_lesson(langs, limit: block_count)
+    ActiveRecord::Base.transaction do
 
-    return unless blocks.present?
+      lesson = Lesson.create!(user: user, target_language: langs.target_language)
 
-    Lesson.create!(blocks: blocks, user: user, target_language: langs.target_language)
+      Sentence.ready_for_lesson(limit: block_count).each do |sentence|
+        Block.create!(lesson: lesson, sentence: sentence)
+      end
+
+      raise ActiveRecord::Rollback if lesson.blocks.empty?
+    end
   end
 end

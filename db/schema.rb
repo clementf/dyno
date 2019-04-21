@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_220022) do
+ActiveRecord::Schema.define(version: 2019_04_10_064610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,15 +37,13 @@ ActiveRecord::Schema.define(version: 2019_03_21_220022) do
   end
 
   create_table "blocks", force: :cascade do |t|
-    t.string "transcript"
-    t.bigint "translation_id"
-    t.integer "target_language_id"
+    t.bigint "lesson_id"
+    t.bigint "sentence_id"
+    t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "sentence_id"
+    t.index ["lesson_id"], name: "index_blocks_on_lesson_id"
     t.index ["sentence_id"], name: "index_blocks_on_sentence_id"
-    t.index ["target_language_id"], name: "index_blocks_on_target_language_id"
-    t.index ["translation_id"], name: "index_blocks_on_translation_id"
   end
 
   create_table "blocks_lessons", id: false, force: :cascade do |t|
@@ -68,6 +66,18 @@ ActiveRecord::Schema.define(version: 2019_03_21_220022) do
     t.bigint "target_language_id"
     t.index ["target_language_id"], name: "index_lessons_on_target_language_id"
     t.index ["user_id"], name: "index_lessons_on_user_id"
+  end
+
+  create_table "old_blocks", force: :cascade do |t|
+    t.string "transcript"
+    t.bigint "translation_id"
+    t.integer "target_language_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "sentence_id"
+    t.index ["sentence_id"], name: "index_old_blocks_on_sentence_id"
+    t.index ["target_language_id"], name: "index_old_blocks_on_target_language_id"
+    t.index ["translation_id"], name: "index_old_blocks_on_translation_id"
   end
 
   create_table "sentences", force: :cascade do |t|
@@ -104,10 +114,12 @@ ActiveRecord::Schema.define(version: 2019_03_21_220022) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blocks", "lessons"
   add_foreign_key "blocks", "sentences"
-  add_foreign_key "blocks", "translations"
   add_foreign_key "lessons", "languages", column: "target_language_id"
   add_foreign_key "lessons", "users"
+  add_foreign_key "old_blocks", "sentences"
+  add_foreign_key "old_blocks", "translations"
   add_foreign_key "translations", "languages"
   add_foreign_key "translations", "sentences", column: "original_id"
 end

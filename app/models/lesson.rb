@@ -22,7 +22,7 @@
 #
 
 class Lesson < ApplicationRecord
-  has_and_belongs_to_many :blocks
+  has_many :blocks
   belongs_to :user, optional: true
   belongs_to :target_language, class_name: 'Language', foreign_key: 'target_language_id'
 

@@ -21,6 +21,8 @@ gem 'rails', '~> 5.2.0'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq', '~> 5.1.3'
 
+gem 'aasm', '~> 5.0.2'
+
 gem 'honeybadger', '~> 4.0'
 gem 'timber', '~> 2.6'
 
@@ -30,10 +32,10 @@ gem 'webpacker', '~> 3.5'
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'pronto'
   gem 'pronto-rubocop', require: false
+  gem 'pry'
 end
 
 group :development do

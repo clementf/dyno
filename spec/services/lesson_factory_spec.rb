@@ -4,7 +4,11 @@ require 'rails_helper'
 
 describe LessonFactory do
   describe '#create' do
-    let(:langs) { Langs.new('nl', 'en') }
+    let(:langs) do
+      create(:language)
+      create(:language, :nl)
+      Langs.new('en', 'nl')
+    end
 
     context 'when passing incorrect langs' do
       it 'return nil' do
@@ -30,23 +34,25 @@ describe LessonFactory do
       it 'return lesson with default length' do
         block_count = LessonFactory::DEFAULT_LESSON_LENGTH / LessonFactory::AVG_BLOCK_LENGTH
 
-        expect(Block).to receive(:ready_for_lesson)
-          .with(langs, limit: block_count)
-          .and_return(build_list(:block, block_count))
+        expect(Sentence).to receive(:ready_for_lesson)
+          .with(limit: block_count)
+          .and_return(build_list(:sentence, block_count))
 
         LessonFactory.create(langs)
 
         expect(Lesson.count).to eq 1
       end
 
-      it 'get blocks to create the lesson' do
+      it 'creates blocks needed for lesson' do
         block_count = LessonFactory::DEFAULT_LESSON_LENGTH / LessonFactory::AVG_BLOCK_LENGTH
 
-        expect(Block).to receive(:ready_for_lesson)
-          .with(langs, limit: block_count)
-          .and_return(build_list(:block, block_count))
+        expect(Sentence).to receive(:ready_for_lesson)
+          .with(limit: block_count)
+          .and_return(build_list(:sentence, block_count))
 
         LessonFactory.create(langs)
+
+        expect(Block.count).to eq(block_count)
       end
     end
 
@@ -55,9 +61,9 @@ describe LessonFactory do
         lesson_length = 22
         block_count = lesson_length / LessonFactory::AVG_BLOCK_LENGTH
 
-        expect(Block).to receive(:ready_for_lesson)
-          .with(langs, limit: block_count)
-          .and_return(build_list(:block, block_count))
+        expect(Sentence).to receive(:ready_for_lesson)
+          .with(limit: block_count)
+          .and_return(build_list(:sentence, block_count))
 
         LessonFactory.create(langs, lesson_length)
       end

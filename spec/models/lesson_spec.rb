@@ -3,5 +3,5 @@
 require 'rails_helper'
 
 describe Lesson do
-  it { is_expected.to have_and_belong_to_many(:blocks) }
+  it { is_expected.to have_many(:blocks) }
 end
