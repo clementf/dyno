@@ -19,6 +19,8 @@ module LessonFactory
       end
 
       raise ActiveRecord::Rollback if lesson.blocks.empty?
+
+      lesson
     end
   end
 end
