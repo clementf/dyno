@@ -5,6 +5,7 @@ module Translatable
 
   included do
     has_one_attached :audio
+    scope :with_audio, -> { joins(:audio_attachment).where.not(audio_attachment: nil) }
   end
 
   def lang

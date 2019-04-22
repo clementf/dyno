@@ -15,8 +15,6 @@ class Sentence < ApplicationRecord
 
   validates_uniqueness_of :content, allow_nil: false
 
-  scope :with_audio, -> { joins(:audio_attachment).where.not(audio_attachment: nil) }
-
   def translations
     Translation.where(original: self)
   end
