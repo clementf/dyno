@@ -18,35 +18,37 @@ class Player {
     if(!this.lessonManager.state.playing)
       return
 
-    var hack_this = this
-    var sound     = this.playlist[this.currentPosition]
-
-    var endOfPlaylist    = this.currentPosition == this.playlist.length - 1
-
-    if(endOfPlaylist){
-      this.lessonManager.pause()
-      this.lessonManager.finish()
-      this.currentPosition = 0;
-      return
-    }
+    var player = this
+    var sound    = this.playlist[this.currentPosition]
 
     sound.play()
+
     sound.on('end', function(){
-      hack_this.currentPosition = endOfPlaylist ? 0 : hack_this.currentPosition + 1
-      if(!hack_this.lessonManager.state.playing)
-        return
+      // Unbind this sound from this event,
+      // otherwise confusion occurs when restarting playlist from start
+      this.off('end')
 
-      // Every word is a playlist item, so pause a little longer every two
-      let waitTime = hack_this.currentPosition % 2 == 1 ? 500 : 1500
+      var endOfPlaylist    = player.currentPosition == player.playlist.length - 1
 
-      hack_this.nextSound = window.setTimeout(function(){
-        hack_this.play();
-      }, waitTime)
+      player.currentPosition = (player.currentPosition + 1) % player.playlist.length
+
+      if(endOfPlaylist){
+        player.lessonManager.pause()
+        player.lessonManager.finish()
+      }
+      else {
+        // Every word is a playlist item, so pause a little longer every two
+        let waitTime = player.currentPosition % 2 == 1 ? 500 : 1500
+
+        player.nextSound = window.setTimeout(function(){
+          player.play();
+        }, waitTime)
+      }
     });
   }
 
   pause(){
-    var sound     = this.playlist[this.currentPosition]
+    var sound = this.playlist[this.currentPosition]
     sound.stop() // stop current word
     sound.off('end') // unbind end event
     window.clearTimeout(this.nextSound) // Dont play next word
