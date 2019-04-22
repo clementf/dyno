@@ -45,7 +45,7 @@ class SentenceDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how sentences are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(sentence)
-  #   "Sentence ##{sentence.id}"
-  # end
+  def display_resource(sentence)
+    sentence.content
+  end
 end

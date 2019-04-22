@@ -8,13 +8,9 @@ class BlockDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    lessons: Field::HasMany,
-    translation: Field::BelongsTo,
+    lesson: Field::BelongsTo,
     sentence: Field::BelongsTo,
-    target_language: Field::BelongsTo.with_options(class_name: "Language"),
     id: Field::Number,
-    transcript: Field::String,
-    target_language_id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,20 +21,16 @@ class BlockDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
-    :lessons,
-    :translation,
+    :lesson,
+    :sentence
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
-    :lessons,
-    :translation,
+    :lesson,
     :sentence,
-    :target_language,
     :id,
-    :transcript,
-    :target_language_id,
     :created_at,
     :updated_at,
   ].freeze
@@ -47,18 +39,14 @@ class BlockDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
-    :lessons,
-    :translation,
+    :lesson,
     :sentence,
-    :target_language,
-    :transcript,
-    :target_language_id,
   ].freeze
 
   # Overwrite this method to customize how blocks are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(block)
-  #   "Block ##{block.id}"
-  # end
+  def display_resource(block)
+    "Block #{block.sentence.content}"
+  end
 end

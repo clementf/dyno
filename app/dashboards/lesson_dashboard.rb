@@ -9,7 +9,8 @@ class LessonDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    blocks: Field::HasMany,
+    blocks: Field::HasMany.with_options(limit: 20),
+    target_language: Field::BelongsTo.with_options(class_name: 'Language'),
     user: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -45,4 +46,8 @@ class LessonDashboard < Administrate::BaseDashboard
     :blocks,
     :user
   ].freeze
+
+  def display_resource(lesson)
+    "#{lesson.target_language.lang} lesson for user ##{lesson.user&.id}"
+  end
 end
