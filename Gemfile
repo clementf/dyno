@@ -20,6 +20,7 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.0'
 gem 'sass-rails', '~> 5.0'
 gem 'sidekiq', '~> 5.1.3'
+gem 'sidekiq-cron', '~> 1.1'
 
 gem 'aasm', '~> 5.0.2'
 

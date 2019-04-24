@@ -27,4 +27,7 @@ class Lesson < ApplicationRecord
   belongs_to :target_language, class_name: 'Language', foreign_key: 'target_language_id'
 
   alias language target_language
+
+  scope :from_yesterday, -> { where(created_at: Date.yesterday.beginning_of_day..Date.yesterday.end_of_day) }
+  scope :for_user, ->(user) { where(user: user) }
 end
