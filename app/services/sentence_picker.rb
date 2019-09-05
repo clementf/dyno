@@ -22,11 +22,15 @@ class SentencePicker
     not_yet_known_lesson_ids = count_lessons_per_sentence
                                .select { |_sentence_id, count| count < known_lesson_threshold }.keys
 
-    sentences_studied_long_ago = Sentence.with_audio.where(id: old_sentences - all_new_sentences).map(&:id).shuffle
-    sentences_not_yet_known    = Sentence.with_audio.where(id: not_yet_known_lesson_ids).map(&:id).shuffle
+    sentences_studied_long_ago = Sentence.with_audio.where(id: old_sentences - all_new_sentences).map(&:id)
+    sentences_not_yet_known    = Sentence.with_audio.where(id: not_yet_known_lesson_ids).map(&:id)
     new_sentences              = Sentence.with_audio.where.not(id: all_new_sentences + old_sentences).map(&:id).shuffle
 
     picked_sentences = []
+
+    Rails.logger.info "sentences_studied_long_ago: #{sentences_studied_long_ago}"
+    Rails.logger.info "sentences_not_yet_known: #{sentences_not_yet_known}"
+    Rails.logger.info "new_sentences: #{new_sentences}"
 
     while picked_sentences.count < @limit
       break if sentences_not_yet_known.empty? && sentences_studied_long_ago.empty? && new_sentences.empty?
