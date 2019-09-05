@@ -72,13 +72,15 @@ describe LessonFactory do
     context 'when passing a user' do
       it 'uses sentence picker' do
         user = build(:user)
+        lesson_length = 22
+        block_count = lesson_length / LessonFactory::AVG_BLOCK_LENGTH
         dummy_sentence_picker = double('sentence_picker', picked_sentences: [])
 
         expect(SentencePicker).to receive(:new)
-          .with(user)
+          .with(user, limit: block_count)
           .and_return(dummy_sentence_picker)
 
-        LessonFactory.create(langs, 5, user)
+        LessonFactory.create(langs, lesson_length, user)
       end
     end
   end
