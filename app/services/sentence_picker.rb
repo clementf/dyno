@@ -73,6 +73,6 @@ class SentencePicker
   end
 
   def old_lesson_threshold
-    30.minutes
+    2.weeks
   end
 end
