@@ -36,7 +36,7 @@ describe LessonFactory do
 
         expect(Sentence).to receive(:ready_for_lesson)
           .with(limit: block_count)
-          .and_return(build_list(:sentence, block_count))
+          .and_return(create_list(:sentence, block_count))
 
         LessonFactory.create(langs)
 
@@ -48,7 +48,7 @@ describe LessonFactory do
 
         expect(Sentence).to receive(:ready_for_lesson)
           .with(limit: block_count)
-          .and_return(build_list(:sentence, block_count))
+          .and_return(create_list(:sentence, block_count))
 
         LessonFactory.create(langs)
 
@@ -56,16 +56,29 @@ describe LessonFactory do
       end
     end
 
-    context 'when passing all arguments' do
+    context 'when passing all necessary arguments' do
       it 'creates the lesson' do
         lesson_length = 22
         block_count = lesson_length / LessonFactory::AVG_BLOCK_LENGTH
 
         expect(Sentence).to receive(:ready_for_lesson)
           .with(limit: block_count)
-          .and_return(build_list(:sentence, block_count))
+          .and_return(create_list(:sentence, block_count))
 
         LessonFactory.create(langs, lesson_length)
+      end
+    end
+
+    context 'when passing a user' do
+      it 'uses sentence picker' do
+        user = build(:user)
+        dummy_sentence_picker = double('sentence_picker', picked_sentences: [])
+
+        expect(SentencePicker).to receive(:new)
+          .with(user)
+          .and_return(dummy_sentence_picker)
+
+        LessonFactory.create(langs, 5, user)
       end
     end
   end
