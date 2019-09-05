@@ -11,11 +11,12 @@ module LessonFactory
     block_count = lesson_length / AVG_BLOCK_LENGTH
 
     ActiveRecord::Base.transaction do
-      if user.present?
-        picked_sentences = SentencePicker.new(user, limit: block_count).picked_sentences
-      else
-        picked_sentences = Sentence.ready_for_lesson(limit: block_count).map(&:id)
-      end
+      picked_sentences = []
+
+      picked_sentences = SentencePicker.new(user, limit: block_count).picked_sentences if user.present?
+
+      # user is not logged in, or fallback if sentence picker didn't return anything
+      picked_sentences = Sentence.ready_for_lesson(limit: block_count).map(&:id) if picked_sentences.empty?
 
       lesson = Lesson.create!(user: user, target_language: langs.target_language)
 
